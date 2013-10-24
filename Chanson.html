@@ -1,0 +1,101 @@
+<!doctype html>
+<head>
+	<meta charset="utf-8">
+	<title>Palmares///Librairie</title>
+	<script	src="js/jquery-1.9.1.js"></script>
+	<script	src="js/jquery.js"></script>
+	<script	src="js/jquery-ui-1.10.3.custom.js"></script>
+	<link href="css/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+	<script	src="js/old theme.js"></script>
+	<link href="css/base.css" rel="stylesheet">
+	
+<script>
+	function createJSON() {
+	    var jsonObj = [];
+	    item = {}
+		$('#accordion input[type=text]').each(function (){
+		  	if($(this).val() == "")
+		  	{
+		  		//
+		  		item[$(this).attr('id')]=null;
+		  	}
+		  	else
+		  	{
+		  		item[$(this).attr('id')]= $(this).val();
+		  	}
+		});
+		jsonObj.push(item);
+		jsonString =JSON.stringify(jsonObj);
+		//Test JSON generé
+		alert(jsonString);
+	}
+	function photoMaj() {
+	    document.getElementById("Photo").src=document.getElementById("AlbumArtworkBigIconUrl").value;
+	   //google_search_api('test','images','1');
+	}
+	function imgError()
+	{
+		document.getElementById("AlbumArtworkBigIconUrl").value="css/Defaut.png";
+		document.getElementById("Photo").src="css/Defaut.png";
+		alert("Lien photo inexistant");
+	}
+</script>
+</head>
+<body>
+		<div id="tabs" width="100%" >
+			<ul>
+				<li><a href="#tabs-1">Ajout musique</a></li>
+				<li><a href="#tabs-2">Téléversement musique</a></li>
+			</ul>
+			<div id="tabs-1" style="overflow: auto; max-height: 950px;">
+				<div>
+				<img id="Photo" src="css/Defaut.png" onerror="imgError()" width="300" height="300" >
+				</div>
+				<div id="accordion" >
+						<h1>Titre</h1>
+						<input id="Name" type="text" class="Song"/>
+						<h1>Artiste</h1>
+						<input  id="ArtistName" type="text" class="Song">
+						<h1>Album</h1>
+						<input  id="AlbumName" type="text" type="text" class="Song">
+						<h1>Adresse chanson</h1>
+						<input  id="Url" type="text" class="Song">
+						<h3>Grande photo</h3>
+						<input  id="AlbumArtworkBigIconUrl" type="text" class="Song" onchange="photoMaj();">
+						<h1>Photo(miniature)</h1>
+						<input  id="AlbumArtworkIconUrl" type="text" class="Song">
+						<h1>Label</h1>
+						<input  id="Label" type="text" class="Song">
+						<h1>Lyrics</h1>
+						<input  id="Lyrics" type="text" class="Song">
+						<h1>CdnId</h1>
+						<input  id="CdnID" type="text" class="Song">
+						<h1>ReleaseYear</h1>
+						<input  id="Year" type="text" class="Song">
+						<h1>OffsetInMiliseconds</h1>
+						<input  id="OffsetMili" type="text" class="Song">
+						<h1>LengthInMiliseconds</h1>
+						<input  id="LengthMili" type="text" class="Song">
+						<h1>lengthInSeconds</h1>
+						<input  id="LengthSec" type="text" class="Song">
+						<h1>ComposerName</h1>
+						<input  id="ComposerName" type="text" class="Song">
+						<h1>RecordCompanyName</h1>
+						<input  id="RecordName" type="text" class="Song">
+						<h1>AlbumCompanyUrl</h1>
+						<input  id="AlbumCompany" type="text" class="Song">
+						<h1>CommerceUrl</h1>
+						<input  id="Commerce" type="text" class="Song">
+				</div>
+					<ul id="icons" class="ui-widget ui-helper-clearfix">
+						<li class="ui-state-default ui-corner-all" title="Valider" onclick="createJSON();"> <span class="ui-icon ui-icon-check"> </span></li>
+						<li class="ui-state-default ui-corner-all" title="Annuler" onclick="clear();"> <span class="ui-icon ui-icon-close"> </span> </li>
+					</ul>
+				</div>
+			<div id="tabs-2">
+				<div id="dropbox" class="dropbox" style="text-align: center">Déposez Ici</div>
+				<script src="js/DropboxEventListener.js"></script>
+			</div>
+		</div>
+</body>
+</html>
