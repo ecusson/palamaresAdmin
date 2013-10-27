@@ -8,10 +8,22 @@
 		<link href="css/jquery-ui-1.10.3.custom.css" rel="stylesheet">
 		<link href="css/base.css" rel="stylesheet">
 		<script>
-
+		/*function chargement(){
+			$.getJSON('http://lamatrice.cloudapp.net/palmaresAdil/v0/palmares/publications', function(data) {
+				alert(data);
+			});
+		*/
+		function chargement(){
+			$.ajax({
+			  dataType: "jsonp",
+			  url: 'http://lamatrice.cloudapp.net/palmaresAdil/v0/palmares/publications' ,
+			  }).done(function ( data ) {
+				console.log(data);
+			});
+		}
 		</script>
 	</head>
-	<body>
+	<body onload="chargement()">
 					<span id="accordion">
 							<h1>Palmarès de la semaine du <span id="startDate"></span></h1>
 							<div class="week-picker"></div>
