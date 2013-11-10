@@ -18,268 +18,76 @@
 			  dataType: "jsonp",
 			  url: 'http://lamatrice.cloudapp.net/palmaresAdil/v0/palmares/publications' ,
 			  }).done(function ( data ) {
-				console.log(data);
+			  	//Affichage console pour aperçu arboresence
+				//console.log(data);
+				//Trimming
+				var Lespalmares = document.createElement('span');
+						with(Lespalmares){
+							id="accordion";
+						}
+				for(j=0;j<data.length;j++)
+				{
+					
+					var unPalmares = document.createElement('h1');
+						with(unPalmares){
+							innerHTML=data[j].Palmares.Name;
+							id='test';
+						}
+					var lesChansonsPalmares = document.createElement('div');
+						with(lesChansonsPalmares){
+							id="accordion"+(j+2);
+						}
+						
+					for(i=0;i<data[j].Palmares.Positions.length;i++)
+					{
+						var uneChanson  = document.createElement('h1');
+							with(uneChanson){
+								innerHTML=data[j].Palmares.Positions[i].Media.Name;
+							}
+						var uneChansonPositionTab = document.createElement('div');
+							with(uneChansonPositionTab){
+								id="test";
+							}
+							var uneChansonPositionTabAssembleur = document.createElement('ul');
+								with(uneChansonPositionTabAssembleur){
+									id='icons';
+									className="ui-widget ui-helper-clearfix"
+								}
+									var unePositionToucheMonter = document.createElement('li');
+									with(unePositionToucheMonter){
+										className='ui-state-default ui-corner-all';
+										title="Monter(Position)"
+									}
+										var unePositionToucheMonterIcone = document.createElement('span');
+										with(unePositionToucheMonterIcone){
+											id='MonterIcone';
+											className ='ui-icon ui-icon-triangle-1-n';
+										}
+										var unePositionToucheMonterDetail = document.createElement('span');
+										with(unePositionToucheMonterDetail){
+											innerHTML='Monter sa position';
+										}
+											unePositionToucheMonter.appendChild(unePositionToucheMonterIcone);
+											unePositionToucheMonter.appendChild(unePositionToucheMonterDetail);
+										uneChansonPositionTabAssembleur.appendChild(unePositionToucheMonter);
+									uneChansonPositionTab.appendChild(uneChansonPositionTabAssembleur);
+							lesChansonsPalmares.appendChild(uneChanson);
+							lesChansonsPalmares.appendChild(uneChansonPositionTab);
+					}
+					Lespalmares.appendChild(unPalmares);
+					Lespalmares.appendChild(lesChansonsPalmares);
+				}
+				document.body.insertBefore(Lespalmares, document.body.childNodes[0]);
+				$("div[id^='accordion']").accordion();
+				$("div[id^='accordion']").accordion({ autoHeight: false});
+				$("span[id^='accordion']").accordion();
+				$("span[id^='accordion']").accordion({ autoHeight: false});
 			});
 		}
 		</script>
 	</head>
 	<body onload="chargement()">
-					<span id="accordion">
-							<h1>Palmarès de la semaine du <span id="startDate"></span></h1>
-							<div class="week-picker"></div>
-							<h1>Francophone</h1>
-								<div id="accordion2" >
-									<h1>Chanson 1</h1>
-									<div id"test">
-										<ul id="icons" class="ui-widget ui-helper-clearfix">
-											<li class="ui-state-default ui-corner-all" title="Monter(Position)"><span class="ui-icon ui-icon-triangle-1-n"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Descendre(Position)"><span class="ui-icon ui-icon-triangle-1-s"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Position"><span id="Position">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Semaine Passée"><span id="SemainePassée">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Nombre de fois dans le palmarès"><span id="NbDeFoisDansPalmarès">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Meilleur position"><span id="MeilleurPos">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Montée depuis la semaine passée"><span id="MontéePos">(&nbsp;   1   &nbsp;)</span></li>
-										</ul>
-									</div>
-									<h1>Chanson 2</h1>
-									<div id"test">
-										<ul id="icons" class="ui-widget ui-helper-clearfix">
-											<li class="ui-state-default ui-corner-all" title="Monter(Position)"><span class="ui-icon ui-icon-triangle-1-n"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Descendre(Position)"><span class="ui-icon ui-icon-triangle-1-s"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Position"><span id="Position">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Semaine Passée"><span id="SemainePassée">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Nombre de fois dans le palmarès"><span id="NbDeFoisDansPalmarès">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Meilleur position"><span id="MeilleurPos">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Montée depuis la semaine passée"><span id="MontéePos">(&nbsp;   1   &nbsp;)</span></li>
-										</ul>
-									</div>
-									<h1>Chanson 3</h1>
-									<div id"test">
-										<ul id="icons" class="ui-widget ui-helper-clearfix">
-											<li class="ui-state-default ui-corner-all" title="Monter(Position)"><span class="ui-icon ui-icon-triangle-1-n"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Descendre(Position)"><span class="ui-icon ui-icon-triangle-1-s"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Position"><span id="Position">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Semaine Passée"><span id="SemainePassée">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Nombre de fois dans le palmarès"><span id="NbDeFoisDansPalmarès">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Meilleur position"><span id="MeilleurPos">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Montée depuis la semaine passée"><span id="MontéePos">(&nbsp;   1   &nbsp;)</span></li>
-										</ul>
-									</div>
-									<h1>Chanson 4</h1>
-									<div id"test">
-										<ul id="icons" class="ui-widget ui-helper-clearfix">
-											<li class="ui-state-default ui-corner-all" title="Monter(Position)"><span class="ui-icon ui-icon-triangle-1-n"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Descendre(Position)"><span class="ui-icon ui-icon-triangle-1-s"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Position"><span id="Position">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Semaine Passée"><span id="SemainePassée">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Nombre de fois dans le palmarès"><span id="NbDeFoisDansPalmarès">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Meilleur position"><span id="MeilleurPos">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Montée depuis la semaine passée"><span id="MontéePos">(&nbsp;   1   &nbsp;)</span></li>
-										</ul>
-									</div>
-									<h1>Chanson 5</h1>
-									<div id"test">
-										<ul id="icons" class="ui-widget ui-helper-clearfix">
-											<li class="ui-state-default ui-corner-all" title="Monter(Position)"><span class="ui-icon ui-icon-triangle-1-n"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Descendre(Position)"><span class="ui-icon ui-icon-triangle-1-s"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Position"><span id="Position">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Semaine Passée"><span id="SemainePassée">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Nombre de fois dans le palmarès"><span id="NbDeFoisDansPalmarès">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Meilleur position"><span id="MeilleurPos">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Montée depuis la semaine passée"><span id="MontéePos">(&nbsp;   1   &nbsp;)</span></li>
-										</ul>
-									</div>
-								</div>
-								
-							<h1>Jazz</h1>
-							<div id="accordion3" >
-									<h1>Chanson 1</h1>
-									<div id"test">
-										<ul id="icons" class="ui-widget ui-helper-clearfix">
-											<li class="ui-state-default ui-corner-all" title="Monter(Position)"><span class="ui-icon ui-icon-triangle-1-n"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Descendre(Position)"><span class="ui-icon ui-icon-triangle-1-s"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Position"><span id="Position">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Semaine Passée"><span id="SemainePassée">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Nombre de fois dans le palmarès"><span id="NbDeFoisDansPalmarès">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Meilleur position"><span id="MeilleurPos">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Montée depuis la semaine passée"><span id="MontéePos">(&nbsp;   1   &nbsp;)</span></li>
-										</ul>
-									</div>
-									<h1>Chanson 2</h1>
-									<div id"test">
-										<ul id="icons" class="ui-widget ui-helper-clearfix">
-											<li class="ui-state-default ui-corner-all" title="Monter(Position)"><span class="ui-icon ui-icon-triangle-1-n"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Descendre(Position)"><span class="ui-icon ui-icon-triangle-1-s"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Position"><span id="Position">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Semaine Passée"><span id="SemainePassée">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Nombre de fois dans le palmarès"><span id="NbDeFoisDansPalmarès">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Meilleur position"><span id="MeilleurPos">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Montée depuis la semaine passée"><span id="MontéePos">(&nbsp;   1   &nbsp;)</span></li>
-										</ul>
-									</div>
-									<h1>Chanson 3</h1>
-									<div id"test">
-										<ul id="icons" class="ui-widget ui-helper-clearfix">
-											<li class="ui-state-default ui-corner-all" title="Monter(Position)"><span class="ui-icon ui-icon-triangle-1-n"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Descendre(Position)"><span class="ui-icon ui-icon-triangle-1-s"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Position"><span id="Position">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Semaine Passée"><span id="SemainePassée">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Nombre de fois dans le palmarès"><span id="NbDeFoisDansPalmarès">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Meilleur position"><span id="MeilleurPos">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Montée depuis la semaine passée"><span id="MontéePos">(&nbsp;   1   &nbsp;)</span></li>
-										</ul>
-									</div>
-									<h1>Chanson 4</h1>
-									<div id"test">
-										<ul id="icons" class="ui-widget ui-helper-clearfix">
-											<li class="ui-state-default ui-corner-all" title="Monter(Position)"><span class="ui-icon ui-icon-triangle-1-n"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Descendre(Position)"><span class="ui-icon ui-icon-triangle-1-s"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Position"><span id="Position">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Semaine Passée"><span id="SemainePassée">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Nombre de fois dans le palmarès"><span id="NbDeFoisDansPalmarès">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Meilleur position"><span id="MeilleurPos">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Montée depuis la semaine passée"><span id="MontéePos">(&nbsp;   1   &nbsp;)</span></li>
-										</ul>
-									</div>
-									<h1>Chanson 5</h1>
-									<div id"test">
-										<ul id="icons" class="ui-widget ui-helper-clearfix">
-											<li class="ui-state-default ui-corner-all" title="Monter(Position)"><span class="ui-icon ui-icon-triangle-1-n"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Descendre(Position)"><span class="ui-icon ui-icon-triangle-1-s"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Position"><span id="Position">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Semaine Passée"><span id="SemainePassée">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Nombre de fois dans le palmarès"><span id="NbDeFoisDansPalmarès">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Meilleur position"><span id="MeilleurPos">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Montée depuis la semaine passée"><span id="MontéePos">(&nbsp;   1   &nbsp;)</span></li>
-										</ul>
-									</div>
-								</div>
-							<h1>Urbain</h1>
-							<div id="accordion4" >
-									<h1>Chanson 1</h1>
-									<div id"test">
-										<ul id="icons" class="ui-widget ui-helper-clearfix">
-											<li class="ui-state-default ui-corner-all" title="Monter(Position)"><span class="ui-icon ui-icon-triangle-1-n"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Descendre(Position)"><span class="ui-icon ui-icon-triangle-1-s"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Position"><span id="Position">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Semaine Passée"><span id="SemainePassée">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Nombre de fois dans le palmarès"><span id="NbDeFoisDansPalmarès">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Meilleur position"><span id="MeilleurPos">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Montée depuis la semaine passée"><span id="MontéePos">(&nbsp;   1   &nbsp;)</span></li>
-										</ul>
-									</div>
-									<h1>Chanson 2</h1>
-									<div id"test">
-										<ul id="icons" class="ui-widget ui-helper-clearfix">
-											<li class="ui-state-default ui-corner-all" title="Monter(Position)"><span class="ui-icon ui-icon-triangle-1-n"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Descendre(Position)"><span class="ui-icon ui-icon-triangle-1-s"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Position"><span id="Position">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Semaine Passée"><span id="SemainePassée">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Nombre de fois dans le palmarès"><span id="NbDeFoisDansPalmarès">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Meilleur position"><span id="MeilleurPos">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Montée depuis la semaine passée"><span id="MontéePos">(&nbsp;   1   &nbsp;)</span></li>
-										</ul>
-									</div>
-									<h1>Chanson 3</h1>
-									<div id"test">
-										<ul id="icons" class="ui-widget ui-helper-clearfix">
-											<li class="ui-state-default ui-corner-all" title="Monter(Position)"><span class="ui-icon ui-icon-triangle-1-n"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Descendre(Position)"><span class="ui-icon ui-icon-triangle-1-s"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Position"><span id="Position">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Semaine Passée"><span id="SemainePassée">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Nombre de fois dans le palmarès"><span id="NbDeFoisDansPalmarès">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Meilleur position"><span id="MeilleurPos">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Montée depuis la semaine passée"><span id="MontéePos">(&nbsp;   1   &nbsp;)</span></li>
-										</ul>
-									</div>
-									<h1>Chanson 4</h1>
-									<div id"test">
-										<ul id="icons" class="ui-widget ui-helper-clearfix">
-											<li class="ui-state-default ui-corner-all" title="Monter(Position)"><span class="ui-icon ui-icon-triangle-1-n"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Descendre(Position)"><span class="ui-icon ui-icon-triangle-1-s"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Position"><span id="Position">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Semaine Passée"><span id="SemainePassée">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Nombre de fois dans le palmarès"><span id="NbDeFoisDansPalmarès">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Meilleur position"><span id="MeilleurPos">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Montée depuis la semaine passée"><span id="MontéePos">(&nbsp;   1   &nbsp;)</span></li>
-										</ul>
-									</div>
-									<h1>Chanson 5</h1>
-									<div id"test">
-										<ul id="icons" class="ui-widget ui-helper-clearfix">
-											<li class="ui-state-default ui-corner-all" title="Monter(Position)"><span class="ui-icon ui-icon-triangle-1-n"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Descendre(Position)"><span class="ui-icon ui-icon-triangle-1-s"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Position"><span id="Position">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Semaine Passée"><span id="SemainePassée">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Nombre de fois dans le palmarès"><span id="NbDeFoisDansPalmarès">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Meilleur position"><span id="MeilleurPos">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Montée depuis la semaine passée"><span id="MontéePos">(&nbsp;   1   &nbsp;)</span></li>
-										</ul>
-									</div>
-								</div>
-							<h1>World</h1>
-							<div id="accordion5" >
-									<h1>Chanson 1</h1>
-									<div id"test">
-										<ul id="icons" class="ui-widget ui-helper-clearfix">
-											<li class="ui-state-default ui-corner-all" title="Monter(Position)"><span class="ui-icon ui-icon-triangle-1-n"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Descendre(Position)"><span class="ui-icon ui-icon-triangle-1-s"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Position"><span id="Position">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Semaine Passée"><span id="SemainePassée">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Nombre de fois dans le palmarès"><span id="NbDeFoisDansPalmarès">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Meilleur position"><span id="MeilleurPos">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Montée depuis la semaine passée"><span id="MontéePos">(&nbsp;   1   &nbsp;)</span></li>
-										</ul>
-									</div>
-									<h1>Chanson 2</h1>
-									<div id"test">
-										<ul id="icons" class="ui-widget ui-helper-clearfix">
-											<li class="ui-state-default ui-corner-all" title="Monter(Position)"><span class="ui-icon ui-icon-triangle-1-n"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Descendre(Position)"><span class="ui-icon ui-icon-triangle-1-s"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Position"><span id="Position">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Semaine Passée"><span id="SemainePassée">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Nombre de fois dans le palmarès"><span id="NbDeFoisDansPalmarès">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Meilleur position"><span id="MeilleurPos">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Montée depuis la semaine passée"><span id="MontéePos">(&nbsp;   1   &nbsp;)</span></li>
-										</ul>
-									</div>
-									<h1>Chanson 3</h1>
-									<div id"test">
-										<ul id="icons" class="ui-widget ui-helper-clearfix">
-											<li class="ui-state-default ui-corner-all" title="Monter(Position)"><span class="ui-icon ui-icon-triangle-1-n"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Descendre(Position)"><span class="ui-icon ui-icon-triangle-1-s"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Position"><span id="Position">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Semaine Passée"><span id="SemainePassée">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Nombre de fois dans le palmarès"><span id="NbDeFoisDansPalmarès">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Meilleur position"><span id="MeilleurPos">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Montée depuis la semaine passée"><span id="MontéePos">(&nbsp;   1   &nbsp;)</span></li>
-										</ul>
-									</div>
-									<h1>Chanson 4</h1>
-									<div id"test">
-										<ul id="icons" class="ui-widget ui-helper-clearfix">
-											<li class="ui-state-default ui-corner-all" title="Monter(Position)"><span class="ui-icon ui-icon-triangle-1-n"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Descendre(Position)"><span class="ui-icon ui-icon-triangle-1-s"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Position"><span id="Position">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Semaine Passée"><span id="SemainePassée">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Nombre de fois dans le palmarès"><span id="NbDeFoisDansPalmarès">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Meilleur position"><span id="MeilleurPos">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Montée depuis la semaine passée"><span id="MontéePos">(&nbsp;   1   &nbsp;)</span></li>
-										</ul>
-									</div>
-									<h1>Chanson 5</h1>
-									<div id"test">
-										<ul id="icons" class="ui-widget ui-helper-clearfix">
-											<li class="ui-state-default ui-corner-all" title="Monter(Position)"><span class="ui-icon ui-icon-triangle-1-n"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Descendre(Position)"><span class="ui-icon ui-icon-triangle-1-s"></span></li>
-											<li class="ui-state-default ui-corner-all" title="Position"><span id="Position">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Semaine Passée"><span id="SemainePassée">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Nombre de fois dans le palmarès"><span id="NbDeFoisDansPalmarès">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Meilleur position"><span id="MeilleurPos">(&nbsp;   1   &nbsp;)</span></li>
-											<li class="ui-state-default ui-corner-all" title="Montée depuis la semaine passée"><span id="MontéePos">(&nbsp;   1   &nbsp;)</span></li>
-										</ul>
-									</div>
-								</div>
-					</span>
+					
+					
 	</body>
 </html>
